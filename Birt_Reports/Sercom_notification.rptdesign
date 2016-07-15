@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <text-property name="title">Sercom Notification</text-property>
     <property name="units">in</property>
     <method name="initialize"><![CDATA[if (params["Msisdn"].value == null)
@@ -96,8 +96,8 @@ else
                     <name>disabledContentBidiFormatStr</name>
                 </ex-property>
             </list-property>
-               <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://10.161.19.23:5432/nano-db</property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://http://10.161.19.23:5432/nano-db</property>
             <property name="odaUser">nano</property>
             <encrypted-property name="odaPassword" encryptionID="base64">bkBuMA==</encrypted-property>
         </oda-data-source>
@@ -312,7 +312,7 @@ else
             </list-property>
             <xml-property name="queryText"><![CDATA[Select * from (select 
 sn.pk,
-sn.create_date,
+sn.notificationtime as create_date,
 sn.notificationtype,
 sn.response,
 sn.notificationpk,
@@ -338,7 +338,7 @@ and loan_request.subscriber_fk = subscriber.pk   )
 from public.sercom_notification sn
 
 where sn.notificationtype like ?
-and date (sn.create_date) between ? and ?
+and date (sn.notificationtime) between ? and ?
 )M
 
 where msisdn like ?]]></xml-property>
